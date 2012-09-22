@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI\WebUI.csproj", "{79BAC9FA-CDAC-446D-8CD5-6F6A9ED6DF9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "..\..\..\..\HTML5\Shithead\src\Shithead\Core\Core.csproj", "{E6C1FF05-C3C5-40D6-995A-B8557A466A30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "..\..\..\..\HTML5\Shithead\src\Shithead\Core.Tests\Core.Tests.csproj", "{91D4BE15-5FBC-478F-87BB-7A253B3B9131}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79BAC9FA-CDAC-446D-8CD5-6F6A9ED6DF9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79BAC9FA-CDAC-446D-8CD5-6F6A9ED6DF9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79BAC9FA-CDAC-446D-8CD5-6F6A9ED6DF9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79BAC9FA-CDAC-446D-8CD5-6F6A9ED6DF9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6C1FF05-C3C5-40D6-995A-B8557A466A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6C1FF05-C3C5-40D6-995A-B8557A466A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6C1FF05-C3C5-40D6-995A-B8557A466A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6C1FF05-C3C5-40D6-995A-B8557A466A30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91D4BE15-5FBC-478F-87BB-7A253B3B9131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91D4BE15-5FBC-478F-87BB-7A253B3B9131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91D4BE15-5FBC-478F-87BB-7A253B3B9131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91D4BE15-5FBC-478F-87BB-7A253B3B9131}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

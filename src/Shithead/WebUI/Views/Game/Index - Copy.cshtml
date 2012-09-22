@@ -1,0 +1,193 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<script type="text/javascript" src="https://raw.github.com/Raynos/pd/master/src/pd.js" ></script>
+<script type="text/javascript">
+
+    $(document).ready(function () { 
+        $('form').submit(function (e) { 
+            e.preventDefault(); 
+            var appointment = {"cards":[{"Suit":0,"Rank":0},{"Suit":0,"Rank":1},{"Suit":0,"Rank":2}]}; 
+            //var appointment = {"cards":{"Suit":0,"Rank":0}}; 
+ 
+            $.ajax({ 
+                url: '@Url.Action("PlayCards")', 
+                type: 'POST', 
+                data: JSON.stringify(appointment), 
+                dataType: 'json', 
+                processData: false, 
+                contentType: 'application/json; charset=utf-8', 
+                success: function (data) { 
+                    alert('Done');
+                },
+                error:function(xhr,err){
+                    alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+                    alert("responseText: "+xhr.responseText);
+                }
+            }); 
+        }); 
+    });
+
+</script> 
+ 
+@using (Html.BeginForm()) { 
+ 
+    @Html.EditorForModel() 
+    <input type="submit" value="Submit" /> 
+} 
+
+<div>
+    <canvas id="player1" width="250" height="250"></canvas>
+    <canvas id="player2" width="250" height="250"></canvas>
+    <canvas id="player3" width="250" height="250"></canvas>
+    <canvas id="player4" width="250" height="250"></canvas>
+    <canvas id="player5" width="250" height="250"></canvas>
+    <canvas id="player6" width="250" height="250"></canvas>
+</div>
+
+<script type="text/javascript">
+
+    
+    var c = document.getElementById("player1");
+//    var ctx = c.getContext("2d");
+//    ctx.translate(c.width / 2, c.height / 2);
+//    ctx.rotate(Math.PI / 180 * 90);
+//    ctx.translate(-c.width / 2, -c.height / 2);
+
+    var Card = {
+
+        rotation: 0,
+
+        isFaceUp: true,
+
+        draw: function (ctx) {
+            var obj = this;
+            if (this.rotation > 0) {
+                ctx.translate(c.width / 2, c.height / 2);
+                ctx.rotate(Math.PI / 180 * 2);
+                ctx.translate(-c.width / 2, -c.height / 2);
+            }
+
+            var img = new Image();
+            img.src = this.getImage(this.rank, this.suit);
+            img.onload = function () {
+                ctx.drawImage(img, obj.x, obj.y);
+            };
+            img.onclick = function () {
+                alert('awef');
+            };
+        },
+
+        setPosition: function (x, y) {
+            this.x = x;
+            this.y = y;
+        },
+
+        getImage: function (rank, suit) {
+            suit = suit + 1;
+            rank = rank + 1;
+            var r = rank < 10 ? '0' + rank : rank;
+            var s = '0' + suit;
+
+            var src = 'content/images/cards/' + s + r + '.png';
+            return src;
+        }
+    };
+
+    var Hand = {
+
+        faceDownCards: [],
+        faceUpCards: [],
+        inHandCards: [],
+
+        initialiseHand: function (handData) {
+
+            this.faceDownCards = handData.FaceDownCards.map(function (c, i) {
+                return Object.create(Card, pd({ rank: c.Rank, suit: c.Suit }));
+            });
+
+            this.faceUpCards = handData.FaceUpCards.map(function (c, i) {
+                return Object.create(Card, pd({ rank: c.Rank, suit: c.Suit }));
+            });
+
+            this.inHandCards = handData.InHandCards.map(function (c, i) {
+                return Object.create(Card, pd({ rank: c.Rank, suit: c.Suit }));
+            });
+
+            
+//            handData.FaceDownCards.forEach(function (c, i) {
+//                this.faceDownCards.push(Object.create(Card, pd({ rank: c.Rank, suit: c.Suit })));
+//            }, this);
+
+//            handData.FaceUpCards.forEach(function (c, i) {
+//                this.faceUpCards.push(Object.create(Card, pd({ rank: c.Rank, suit: c.Suit })));
+//            }, this);
+
+//            handData.InHandCards.forEach(function (c, i) {
+//                this.inHandCards.push(Object.create(Card, pd({ rank: c.Rank, suit: c.Suit })));
+//            }, this);
+
+        },
+
+        draw: function (context) {
+            this.faceDownCards.forEach(function (c, i) {
+                c.draw(context);
+            });
+
+            this.faceUpCards.forEach(function (c, i) {
+                c.draw(context);
+            });
+
+            this.inHandCards.forEach(function (c, i) {
+                c.draw(context);
+            });
+        },
+
+        setPosition: function (x, y) {
+            this.x = x;
+            this.y = y;
+            this.faceDownCards.forEach(function (c, i) {
+                c.setPosition(x + i * 70, y);
+            });
+            this.faceUpCards.forEach(function (c, i) {
+                c.setPosition(x + i * 70, y + 60);
+            });
+            this.inHandCards.forEach(function (c, i) {
+                c.setPosition(x + i * 20, y + 80);
+                //c.rotation = 3;
+            });
+        }
+    };
+
+    
+    var gameState = { "Players": [{ "Id": "8f43380c-7402-4585-88fc-e1d0b1040272", "Hand": { "FaceDownCards": [{ "Suit": 0, "Rank": 5 }, { "Suit": 0, "Rank": 8 }, { "Suit": 3, "Rank": 8}], "FaceUpCards": [{ "Suit": 0, "Rank": 12 }, { "Suit": 1, "Rank": 12 }, { "Suit": 1, "Rank": 0}], "InHandCards": [{ "Suit": 1, "Rank": 8 }, { "Suit": 1, "Rank": 3 }, { "Suit": 0, "Rank": 2}] }, "IsThisPlayersTurn": true, "IsAbleToPlay": true, "Name": "Chris", "PlayerState": 0 }, { "Id": "82d518a3-4923-46ab-8e11-5de4604dc059", "Hand": { "FaceDownCards": [{ "Suit": 3, "Rank": 11 }, { "Suit": 1, "Rank": 4 }, { "Suit": 0, "Rank": 0}], "FaceUpCards": [{ "Suit": 2, "Rank": 0 }, { "Suit": 1, "Rank": 1 }, { "Suit": 3, "Rank": 4}], "InHandCards": [{ "Suit": 2, "Rank": 2 }, { "Suit": 2, "Rank": 7 }, { "Suit": 2, "Rank": 4}] }, "IsThisPlayersTurn": false, "IsAbleToPlay": true, "Name": "Vik", "PlayerState": 0 }, { "Id": "aa7ec630-5a6d-47b8-8365-456a138be833", "Hand": { "FaceDownCards": [{ "Suit": 2, "Rank": 8 }, { "Suit": 3, "Rank": 10 }, { "Suit": 0, "Rank": 10}], "FaceUpCards": [{ "Suit": 3, "Rank": 9 }, { "Suit": 3, "Rank": 6 }, { "Suit": 2, "Rank": 1}], "InHandCards": [{ "Suit": 3, "Rank": 0 }, { "Suit": 0, "Rank": 1 }, { "Suit": 3, "Rank": 2}] }, "IsThisPlayersTurn": false, "IsAbleToPlay": true, "Name": "Val", "PlayerState": 0 }, { "Id": "35fd0fbe-4bea-4493-a854-6df9bf9c37ee", "Hand": { "FaceDownCards": [{ "Suit": 1, "Rank": 9 }, { "Suit": 3, "Rank": 3 }, { "Suit": 2, "Rank": 10}], "FaceUpCards": [{ "Suit": 2, "Rank": 3 }, { "Suit": 0, "Rank": 6 }, { "Suit": 0, "Rank": 7}], "InHandCards": [{ "Suit": 1, "Rank": 10 }, { "Suit": 3, "Rank": 1 }, { "Suit": 3, "Rank": 7}] }, "IsThisPlayersTurn": false, "IsAbleToPlay": true, "Name": "Mollusc", "PlayerState": 0 }, { "Id": "24202985-4576-456f-ab08-412425bb332e", "Hand": { "FaceDownCards": [{ "Suit": 3, "Rank": 5 }, { "Suit": 2, "Rank": 9 }, { "Suit": 0, "Rank": 11}], "FaceUpCards": [{ "Suit": 2, "Rank": 11 }, { "Suit": 2, "Rank": 12 }, { "Suit": 0, "Rank": 9}], "InHandCards": [{ "Suit": 1, "Rank": 5 }, { "Suit": 1, "Rank": 11}] }, "IsThisPlayersTurn": false, "IsAbleToPlay": true, "Name": "Satch", "PlayerState": 0 }, { "Id": "88b256f5-5a11-4160-a880-cb74b2dc5e35", "Hand": { "FaceDownCards": [{ "Suit": 0, "Rank": 3 }, { "Suit": 1, "Rank": 7 }, { "Suit": 0, "Rank": 4}], "FaceUpCards": [{ "Suit": 2, "Rank": 5 }, { "Suit": 1, "Rank": 2 }, { "Suit": 3, "Rank": 12}], "InHandCards": [{ "Suit": 2, "Rank": 6 }, { "Suit": 1, "Rank": 6}] }, "IsThisPlayersTurn": false, "IsAbleToPlay": true, "Name": "Pest", "PlayerState": 0}], "Deck": [], "PickUpPack": [], "ClearedCards": [], "CurrentPlayer": { "Id": "8f43380c-7402-4585-88fc-e1d0b1040272", "Hand": { "FaceDownCards": [{ "Suit": 0, "Rank": 5 }, { "Suit": 0, "Rank": 8 }, { "Suit": 3, "Rank": 8}], "FaceUpCards": [{ "Suit": 0, "Rank": 12 }, { "Suit": 1, "Rank": 12 }, { "Suit": 1, "Rank": 0}], "InHandCards": [{ "Suit": 1, "Rank": 8 }, { "Suit": 1, "Rank": 3 }, { "Suit": 0, "Rank": 2}] }, "IsThisPlayersTurn": true, "IsAbleToPlay": true, "Name": "Chris", "PlayerState": 0} };
+
+    gameState.Players.forEach(function (player, i) {
+
+        var inx = i + 1;
+        var canvas = document.getElementById("player" + inx);
+        var ctx = canvas.getContext("2d");
+
+        var hand = Object.create(Hand);
+        hand.initialiseHand(player.Hand);
+        hand.setPosition(10, 10);
+        hand.draw(ctx);
+    });
+
+
+//    var canvas = document.getElementById("player1");
+//    var ctx = canvas.getContext("2d");
+//    ctx.translate(c.width / 2, c.height / 2);
+//    ctx.rotate(Math.PI / 180 * 90);
+//    ctx.translate(-c.width / 2, -c.height / 2);
+
+//    var handData = gameState.Players[0].Hand;
+//    
+//    //var h = Object.create(Hand, pd({ faceDownCards: [] }));
+//    var hand = Object.create(Hand);
+//    hand.initialiseHand(handData);
+//    hand.setPosition(10, 10);
+//    hand.draw(ctx);
+
+</script>
