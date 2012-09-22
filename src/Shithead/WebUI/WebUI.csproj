@@ -152,6 +152,62 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\Cards\0101.png" />
+    <Content Include="Content\Images\Cards\0102.png" />
+    <Content Include="Content\Images\Cards\0103.png" />
+    <Content Include="Content\Images\Cards\0104.png" />
+    <Content Include="Content\Images\Cards\0105.png" />
+    <Content Include="Content\Images\Cards\0106.png" />
+    <Content Include="Content\Images\Cards\0107.png" />
+    <Content Include="Content\Images\Cards\0108.png" />
+    <Content Include="Content\Images\Cards\0109.png" />
+    <Content Include="Content\Images\Cards\0110.png" />
+    <Content Include="Content\Images\Cards\0111.png" />
+    <Content Include="Content\Images\Cards\0112.png" />
+    <Content Include="Content\Images\Cards\0113.png" />
+    <Content Include="Content\Images\Cards\0201.png" />
+    <Content Include="Content\Images\Cards\0202.png" />
+    <Content Include="Content\Images\Cards\0203.png" />
+    <Content Include="Content\Images\Cards\0204.png" />
+    <Content Include="Content\Images\Cards\0205.png" />
+    <Content Include="Content\Images\Cards\0206.png" />
+    <Content Include="Content\Images\Cards\0207.png" />
+    <Content Include="Content\Images\Cards\0208.png" />
+    <Content Include="Content\Images\Cards\0209.png" />
+    <Content Include="Content\Images\Cards\0210.png" />
+    <Content Include="Content\Images\Cards\0211.png" />
+    <Content Include="Content\Images\Cards\0212.png" />
+    <Content Include="Content\Images\Cards\0213.png" />
+    <Content Include="Content\Images\Cards\0301.png" />
+    <Content Include="Content\Images\Cards\0302.png" />
+    <Content Include="Content\Images\Cards\0303.png" />
+    <Content Include="Content\Images\Cards\0304.png" />
+    <Content Include="Content\Images\Cards\0305.png" />
+    <Content Include="Content\Images\Cards\0306.png" />
+    <Content Include="Content\Images\Cards\0307.png" />
+    <Content Include="Content\Images\Cards\0308.png" />
+    <Content Include="Content\Images\Cards\0309.png" />
+    <Content Include="Content\Images\Cards\0310.png" />
+    <Content Include="Content\Images\Cards\0311.png" />
+    <Content Include="Content\Images\Cards\0312.png" />
+    <Content Include="Content\Images\Cards\0313.png" />
+    <Content Include="Content\Images\Cards\0401.png" />
+    <Content Include="Content\Images\Cards\0402.png" />
+    <Content Include="Content\Images\Cards\0403.png" />
+    <Content Include="Content\Images\Cards\0404.png" />
+    <Content Include="Content\Images\Cards\0405.png" />
+    <Content Include="Content\Images\Cards\0406.png" />
+    <Content Include="Content\Images\Cards\0407.png" />
+    <Content Include="Content\Images\Cards\0408.png" />
+    <Content Include="Content\Images\Cards\0409.png" />
+    <Content Include="Content\Images\Cards\0410.png" />
+    <Content Include="Content\Images\Cards\0411.png" />
+    <Content Include="Content\Images\Cards\0412.png" />
+    <Content Include="Content\Images\Cards\0413.png" />
+    <Content Include="Content\Images\Cards\0501.png" />
+    <Content Include="Content\Images\Cards\0502.png" />
+    <Content Include="Content\Images\Cards\0503.png" />
+    <Content Include="Content\Images\Cards\0504.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -295,7 +351,7 @@
     <Content Include="Views\Game\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\HTML5\Shithead\src\Shithead\Core\Core.csproj">
+    <ProjectReference Include="..\Core\Core.csproj">
       <Project>{E6C1FF05-C3C5-40D6-995A-B8557A466A30}</Project>
       <Name>Core</Name>
     </ProjectReference>

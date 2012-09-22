@@ -8,6 +8,7 @@ namespace Shithead.Core
     {
         //private static readonly ILog Log = LogManager.GetLogger(typeof(Game));
 
+        public int Id { get; set; }
         public List<Player> Players { get; internal set; }
         public Deck Deck { get; internal set; }
         public List<Card> PickUpPack { get; internal set; }

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI\WebUI.csproj", "{79BAC9FA-CDAC-446D-8CD5-6F6A9ED6DF9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "..\..\..\..\HTML5\Shithead\src\Shithead\Core\Core.csproj", "{E6C1FF05-C3C5-40D6-995A-B8557A466A30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{E6C1FF05-C3C5-40D6-995A-B8557A466A30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "..\..\..\..\HTML5\Shithead\src\Shithead\Core.Tests\Core.Tests.csproj", "{91D4BE15-5FBC-478F-87BB-7A253B3B9131}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "Core.Tests\Core.Tests.csproj", "{91D4BE15-5FBC-478F-87BB-7A253B3B9131}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
