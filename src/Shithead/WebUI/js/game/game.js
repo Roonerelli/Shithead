@@ -1,6 +1,7 @@
 ﻿APP.game = function () {
 
-    var stage,
+    var gameHub,
+        stage,
         pickupPack = [],
         clearedCards = [];
 
@@ -104,17 +105,19 @@
             };
 
             this.bmp.onClick = function () {
-                console.log("this: " + container.getChildIndex(self.bmp));
+                //console.log("this: " + container.getChildIndex(self.bmp));
                 var noOfChildren = container.getNumChildren();
                 var topChild = container.getChildAt(noOfChildren - 1);
-                console.log("top child: " + container.getChildIndex(topChild));
+                //console.log("top child: " + container.getChildIndex(topChild));
 
-                //container.swapChildren(self.bmp, topChild);
                 container.setChildIndex(self.bmp, noOfChildren);
-                //container.setChildIndex(topChild, noOfChildren - 1);
-                console.log("this: " + container.getChildIndex(self.bmp));
-                console.log("top child: " + container.getChildIndex(topChild));
+                //console.log("this: " + container.getChildIndex(self.bmp));
+                //console.log("top child: " + container.getChildIndex(topChild));
                 self.isBeingPlayed = true;
+
+                var cards = [{ "Suit": self.suit, "Rank": self.rank}];
+                
+                gameHub.playCards(cards);
             };
         },
 
@@ -174,24 +177,25 @@
 
         $(document).ready(function () {
 
+            gameHub = $.connection.gameHub;
+
             $.connection.hub.start()
                 .done(function () {
-                    gameHub.startNewGame();
+                    console.log("connected...");
                 })
                 .fail(function () {
                     alert("Could not Connect!");
                 });
 
-            var gameHub = $.connection.gameHub;
+            var canvas = document.getElementById("gameCanvas");
+            stage = new createjs.Stage(canvas);
+            stage.enableMouseOver(50);
+            createjs.Ticker.setFPS(60);
+            createjs.Ticker.addListener(stage);
 
             gameHub.recieveGameState = function (data) {
                 console.log(data);
-                
-                var canvas = document.getElementById("gameCanvas");
-                stage = new createjs.Stage(canvas);
-                stage.enableMouseOver(50);
-                //var gameState = { "Players": [{ "Id": "8f43380c-7402-4585-88fc-e1d0b1040272", "Hand": { "FaceDownCards": [{ "Suit": 0, "Rank": 5 }, { "Suit": 0, "Rank": 8 }, { "Suit": 3, "Rank": 8}], "FaceUpCards": [{ "Suit": 0, "Rank": 12 }, { "Suit": 1, "Rank": 12 }, { "Suit": 1, "Rank": 0}], "InHandCards": [{ "Suit": 1, "Rank": 8 }, { "Suit": 1, "Rank": 3 }, { "Suit": 0, "Rank": 2}] }, "IsThisPlayersTurn": true, "IsAbleToPlay": true, "Name": "Chris", "PlayerState": 0 }, { "Id": "82d518a3-4923-46ab-8e11-5de4604dc059", "Hand": { "FaceDownCards": [{ "Suit": 3, "Rank": 11 }, { "Suit": 1, "Rank": 4 }, { "Suit": 0, "Rank": 0}], "FaceUpCards": [{ "Suit": 2, "Rank": 0 }, { "Suit": 1, "Rank": 1 }, { "Suit": 3, "Rank": 4}], "InHandCards": [{ "Suit": 2, "Rank": 2 }, { "Suit": 2, "Rank": 7 }, { "Suit": 2, "Rank": 4}] }, "IsThisPlayersTurn": false, "IsAbleToPlay": true, "Name": "Vik", "PlayerState": 0 }, { "Id": "aa7ec630-5a6d-47b8-8365-456a138be833", "Hand": { "FaceDownCards": [{ "Suit": 2, "Rank": 8 }, { "Suit": 3, "Rank": 10 }, { "Suit": 0, "Rank": 10}], "FaceUpCards": [{ "Suit": 3, "Rank": 9 }, { "Suit": 3, "Rank": 6 }, { "Suit": 2, "Rank": 1}], "InHandCards": [{ "Suit": 3, "Rank": 0 }, { "Suit": 0, "Rank": 1 }, { "Suit": 3, "Rank": 2}] }, "IsThisPlayersTurn": false, "IsAbleToPlay": true, "Name": "Val", "PlayerState": 0 }, { "Id": "35fd0fbe-4bea-4493-a854-6df9bf9c37ee", "Hand": { "FaceDownCards": [{ "Suit": 1, "Rank": 9 }, { "Suit": 3, "Rank": 3 }, { "Suit": 2, "Rank": 10}], "FaceUpCards": [{ "Suit": 2, "Rank": 3 }, { "Suit": 0, "Rank": 6 }, { "Suit": 0, "Rank": 7}], "InHandCards": [{ "Suit": 1, "Rank": 10 }, { "Suit": 3, "Rank": 1 }, { "Suit": 3, "Rank": 7}] }, "IsThisPlayersTurn": false, "IsAbleToPlay": true, "Name": "Mollusc", "PlayerState": 0 }, { "Id": "24202985-4576-456f-ab08-412425bb332e", "Hand": { "FaceDownCards": [{ "Suit": 3, "Rank": 5 }, { "Suit": 2, "Rank": 9 }, { "Suit": 0, "Rank": 11}], "FaceUpCards": [{ "Suit": 2, "Rank": 11 }, { "Suit": 2, "Rank": 12 }, { "Suit": 0, "Rank": 9}], "InHandCards": [{ "Suit": 1, "Rank": 5 }, { "Suit": 1, "Rank": 11}] }, "IsThisPlayersTurn": false, "IsAbleToPlay": true, "Name": "Satch", "PlayerState": 0 }, { "Id": "88b256f5-5a11-4160-a880-cb74b2dc5e35", "Hand": { "FaceDownCards": [{ "Suit": 0, "Rank": 3 }, { "Suit": 1, "Rank": 7 }, { "Suit": 0, "Rank": 4}], "FaceUpCards": [{ "Suit": 2, "Rank": 5 }, { "Suit": 1, "Rank": 2 }, { "Suit": 3, "Rank": 12}], "InHandCards": [{ "Suit": 2, "Rank": 6 }, { "Suit": 1, "Rank": 6}] }, "IsThisPlayersTurn": false, "IsAbleToPlay": true, "Name": "Pest", "PlayerState": 0}], "Deck": [], "PickUpPack": [], "ClearedCards": [], "CurrentPlayer": { "Id": "8f43380c-7402-4585-88fc-e1d0b1040272", "Hand": { "FaceDownCards": [{ "Suit": 0, "Rank": 5 }, { "Suit": 0, "Rank": 8 }, { "Suit": 3, "Rank": 8}], "FaceUpCards": [{ "Suit": 0, "Rank": 12 }, { "Suit": 1, "Rank": 12 }, { "Suit": 1, "Rank": 0}], "InHandCards": [{ "Suit": 1, "Rank": 8 }, { "Suit": 1, "Rank": 3 }, { "Suit": 0, "Rank": 2}] }, "IsThisPlayersTurn": true, "IsAbleToPlay": true, "Name": "Chris", "PlayerState": 0} };
-                
+
                 data.Players.forEach(function (player, i) {
                     var container = new createjs.Container();
 
@@ -203,18 +207,50 @@
 
                     stage.addChild(container);
                 });
-
-                createjs.Ticker.setFPS(60);
-                createjs.Ticker.addListener(stage);
             };
+
+            $('#joinGame').click(function () {
+                gameHub.joinGame();
+            });
+
+            $('#beginGame').click(function () {
+
+                var url = window.location.pathname;
+                var id = url.substr(url.lastIndexOf('/') + 1);
+                console.log(id);
+                gameHub.beginGame(id);
+            });
+        });
+    }
+
+    function _join() {
+
+        $('#newGame').click(function () {
+            newGame();
         });
 
-        
+        function newGame() {
+            jQuery.support.cors = true;
+
+            $.ajax({
+                url: 'http://localhost:50105/api/gameapi',
+                type: 'POST',
+                //data: JSON.stringify(employee),
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    $('#gameList').append('<li>sssss</li>');
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
     }
 
     return {
         init: _init,
-        index: _index
+        index: _index,
+        join: _join
     };
 
 } ();

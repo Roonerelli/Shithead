@@ -10,41 +10,38 @@ namespace WebUI.Hubs
 {
     public class GameHub : Hub
     {
-        public void StartNewGame()
+        private DocumentStore documentStore;
+
+        public GameHub()
         {
-            Game game = new Game();
-            game.AddPlayer(new Player("Chris"));
-            game.AddPlayer(new Player("Vik"));
-            game.AddPlayer(new Player("Val"));
-            game.AddPlayer(new Player("Mollusc"));
-            game.AddPlayer(new Player("Satch"));
-            game.AddPlayer(new Player("Pest"));
-
-            game.StartNewGame();
-
-            var documentStore = new DocumentStore { Url = "http://LAPPIE:8080" };
+            documentStore = new DocumentStore { Url = "http://LAPPIE:8080" };
             documentStore.Initialize();
-
-            using (var session = documentStore.OpenSession())
-            {
-                session.Store(game);
-                session.SaveChanges();
-            }
-
-            Clients.RecieveGameState(game);
-
         }
 
         public void JoinGame(int gameId)
         {
             
-
-            
         }
 
-        public void Send(string data)
+        public void BeginGame(int gameId)
         {
-            Clients.addMessage(data);
+            Game game;
+            using (var session = documentStore.OpenSession())
+            {
+                game = session.Load<Game>(gameId);
+            }
+
+            if (!game.HasStarted)
+            {
+                game.StartNewGame();
+            }
+            
+            Clients.RecieveGameState(game);
+        }
+
+        public void PlayCards(List<Card> cards)
+        {
+
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿@model WebUI.ViewModels.JoinViewModel
+
+@{
+    ViewBag.Title = "Join";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Join or start a game</h2>
+
+<div class="row">
+    <ul class="button-group [radius, rounded]">
+        <li><a href="#" id="newGame" class="button radius">New Game</a></li>
+    </ul>
+    
+    <ul id="gameList">
+        @foreach (var g in Model.Games)
+        {
+            <li>Id: @g.Id . Players : @g.Players.Count <a href="/game/index/@g.Id" id="@g.Id" class="button radius joinGame">Join Game</a></li>
+        }
+    </ul>
+</div>

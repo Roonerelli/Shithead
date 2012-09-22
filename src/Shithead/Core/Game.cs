@@ -13,6 +13,8 @@ namespace Shithead.Core
         public Deck Deck { get; internal set; }
         public List<Card> PickUpPack { get; internal set; }
         public CardList ClearedCards { get; internal set; }
+        public bool CanJoin { get; private set; }
+        public bool HasStarted { get; private set; }
 
         public Player CurrentPlayer
         {
@@ -31,6 +33,7 @@ namespace Shithead.Core
             ClearedCards = new CardList();
             Direction = Direction.Forwards;
             Players = new List<Player>();
+            CanJoin = true;
         }
 
         public void AddPlayer(Player player)
@@ -45,6 +48,8 @@ namespace Shithead.Core
             Players[0].IsAbleToPlay = true;
             Deck.Shuffle();
             DealStartingCards();
+            CanJoin = false;
+            HasStarted = true;
             //Log.Info("New Game Started.");
         }
 

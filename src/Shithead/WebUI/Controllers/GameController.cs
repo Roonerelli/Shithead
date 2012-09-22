@@ -3,51 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Raven.Client.Document;
 using Shithead.Core;
+using WebUI.ViewModels;
 
 namespace WebUI.Controllers
 {
     public class GameController : Controller
     {
-        //
-        // GET: /Game/
+        private DocumentStore documentStore;
 
-        public ActionResult Index()
+        public GameController()
         {
+            documentStore = new DocumentStore { Url = "http://LAPPIE:8080" };
+            documentStore.Initialize();
+        }
+        public ActionResult Index(int id)
+        {
+
             return View();
         }
 
-        public ActionResult StartGame()
+        public ActionResult Join()
         {
-            Game game = new Game();
-            game.AddPlayer(new Player("Chris"));
-            game.AddPlayer(new Player("Vik"));
-            game.AddPlayer(new Player("Val"));
-            game.AddPlayer(new Player("Mollusc"));
-            game.AddPlayer(new Player("Satch"));
-            game.AddPlayer(new Player("Pest"));
+            IQueryable<Game> results;
+            using (var session = documentStore.OpenSession())
+            {
+                results = session.Query<Game>().Where(x => x.CanJoin);
+            }
 
-            game.StartNewGame();
+            JoinViewModel vm = new JoinViewModel
+            {
+                Games = results.ToList()
+            };
 
-            return Json(game, JsonRequestBehavior.AllowGet);
+            return View(vm);
         }
 
-        [HttpPost]
-        //public ActionResult PlayCards(Card cards)
-        public ActionResult PlayCards(List<Card> cards)
-        {
-            return View("Index");
-        }
-
+        //public ActionResult PlayCards(List<Card> cards)
+        
         public ActionResult Test()
         {
             return View();
         }
-
-
-
-
-
-
     }
 }
