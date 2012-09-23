@@ -152,6 +152,7 @@
     </Compile>
     <Compile Include="Hubs\GameHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\TurnViewModel.cs" />
     <Compile Include="ViewModels\JoinViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +275,10 @@
     <Content Include="Content\Images\glyphicons-halflings-white.png" />
     <Content Include="Content\Images\glyphicons-halflings.png" />
     <Content Include="js\common\common.js" />
+    <Content Include="js\game\modules\card.js" />
+    <Content Include="js\game\modules\game.js" />
+    <Content Include="js\game\modules\hand.js" />
+    <Content Include="js\game\modules\player.js" />
     <Content Include="js\libs\easel.js" />
     <Content Include="js\game\game.js" />
     <Content Include="js\home\home.js" />

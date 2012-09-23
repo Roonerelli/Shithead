@@ -20,7 +20,7 @@ namespace WebUI.Controllers
         }
         public ActionResult Index(int id)
         {
-
+            ViewData["GameId"] = id;
             return View();
         }
 
@@ -40,8 +40,6 @@ namespace WebUI.Controllers
             return View(vm);
         }
 
-        //public ActionResult PlayCards(List<Card> cards)
-        
         public ActionResult Test()
         {
             return View();
