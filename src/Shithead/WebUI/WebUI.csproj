@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlTags">
+      <HintPath>..\packages\HtmlTags.1.1.0.111\lib\4.0\HtmlTags.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.4.5.7\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -266,15 +269,12 @@
     <Content Include="css\fonts\BebasNeue-webfont.svg" />
     <Content Include="css\foundation.css" />
     <Content Include="css\foundation.min.css" />
-    <Content Include="css\style.css" />
-    <Content Include="css\_style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Images\glyphicons-halflings-white.png" />
     <Content Include="Content\Images\glyphicons-halflings.png" />
     <Content Include="js\common\common.js" />
-    <Content Include="js\css\style.css" />
-    <Content Include="js\easel.js" />
+    <Content Include="js\libs\easel.js" />
     <Content Include="js\game\game.js" />
     <Content Include="js\home\home.js" />
     <Content Include="js\libs\app.js" />
@@ -285,27 +285,22 @@
     <Content Include="js\libs\modernizr-2.5.3.min.js" />
     <Content Include="js\libs\modernizr.foundation.js" />
     <Content Include="js\plugins.js" />
-    <Content Include="js\script.js" />
-    <Content Include="js\Scripts-combined.js" />
     <Content Include="js\util.js" />
-    <Content Include="js\_script.js" />
-    <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.20.js" />
-    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
-    <Content Include="Scripts\jquery.signalR-0.5.3.js" />
-    <Content Include="Scripts\jquery.signalR-0.5.3.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-2.1.0.debug.js" />
-    <Content Include="Scripts\knockout-2.1.0.js" />
-    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="js\libs\jquery-1.7.1-vsdoc.js" />
+    <Content Include="js\libs\jquery-ui-1.8.20.js" />
+    <Content Include="js\libs\jquery-ui-1.8.20.min.js" />
+    <Content Include="js\libs\jquery.signalR-0.5.3.js" />
+    <Content Include="js\libs\jquery.signalR-0.5.3.min.js" />
+    <Content Include="js\libs\jquery.unobtrusive-ajax.js" />
+    <Content Include="js\libs\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="js\libs\jquery.validate-vsdoc.js" />
+    <Content Include="js\libs\jquery.validate.js" />
+    <Content Include="js\libs\jquery.validate.min.js" />
+    <Content Include="js\libs\jquery.validate.unobtrusive.js" />
+    <Content Include="js\libs\jquery.validate.unobtrusive.min.js" />
+    <Content Include="js\libs\knockout-2.1.0.debug.js" />
+    <Content Include="js\libs\knockout-2.1.0.js" />
+    <Content Include="js\libs\modernizr-2.5.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -313,8 +308,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
