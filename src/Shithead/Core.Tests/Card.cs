@@ -17,12 +17,7 @@ namespace Tests
         public Card(string suit, int rank) : this()
         {
             Suit = GetSuitFromString(suit);
-            Rank = GetRankFromInt(rank);
-        }
-
-        private Rank GetRankFromInt(int rank)
-        {
-            return (Rank) rank;
+            Rank = (Rank)rank;
         }
 
         private Suit GetSuitFromString(string suit)
@@ -46,7 +41,5 @@ namespace Tests
         {
             return string.Format("{0} of {1}s", Rank, Suit);
         }
-        
     }
 }
-

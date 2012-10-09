@@ -21,6 +21,7 @@
         $(document).ready(function () {
 
             var gameHub = $.connection.gameHub;
+            var game;
 
             $.connection.hub.start()
                 .done(function () {
@@ -62,10 +63,7 @@
             });
 
             $('#beginGame').click(function () {
-
-                var url = window.location.pathname;
-                var id = url.substr(url.lastIndexOf('/') + 1);
-                console.log(id);
+                var id = $('#gameId').val();
                 gameHub.beginGame(id);
             });
         });
@@ -86,7 +84,7 @@
                 //data: JSON.stringify(employee),
                 contentType: "application/json;charset=utf-8",
                 success: function (data) {
-                    $('#gameList').append('<li>sssss</li>');
+                    $('#gameList').append('<li>New Game....</li>');
                 },
                 error: function (x, y, z) {
                     alert(x + '\n' + y + '\n' + z);

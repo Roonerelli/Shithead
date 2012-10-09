@@ -104,7 +104,7 @@ public class GameTests : BaseGameTest
     }
 
     [Test]
-    public void When_game_starts_its_only_one_players_turn_and_that_is_the_first_player()
+    public void When_game_starts_its__the_first_players_turn_only()
     {
         var game = GetGame();
         Assert.AreEqual(1, game.Players.Count(plyr => plyr.IsMyTurn));
@@ -146,7 +146,6 @@ public class GameTests : BaseGameTest
         Assert.AreEqual(2, game.PickUpPile.Count);
         Assert.AreEqual(new Card("S", 0), game.PickUpPile[0]);
         Assert.AreEqual(new Card("H", 0), game.PickUpPile[1]);
-
     }
 
     [Test]
