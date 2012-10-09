@@ -9,7 +9,7 @@
                             : '/content/images/cards/0504.png';
     this.bmp = new createjs.Bitmap(this.imgUri);
     this.hand = hand;
-    //createjs.Ticker.addListener(this);
+    createjs.Ticker.addListener(this);
 };
 
 Card.prototype = {
