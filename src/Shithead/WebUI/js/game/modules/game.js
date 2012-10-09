@@ -1,6 +1,11 @@
-﻿var Game = function (gameData) {
+﻿var Game = function (gameData, gameHub) {
     var self = this;
-    this.gameData = gameData;
+
+    this.gameHub = gameHub;
+    this.pickUpPack = gameData.PickUpPack;
+    this.clearedCards = gameData.ClearedCards;
+    this.deck = gameData.Deck;
+
     this.players = gameData.Players.map(function (player, i) {
         return new Player(player, i, self);
     });

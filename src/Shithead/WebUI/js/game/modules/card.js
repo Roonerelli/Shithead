@@ -1,5 +1,4 @@
 ﻿var Card = function (rank, suit, isFaceUp, hand) {
-    console.log('New Card');
     this.suit = suit;
     this.rank = rank;
     this.isFaceUp = isFaceUp;
@@ -46,7 +45,7 @@ Card.prototype = {
                 cardsPlayed: [{ "Suit": self.suit, "Rank": self.rank}]
             };
 
-            self.hand.gameHub.playCards(turn);
+            self.hand.player.game.gameHub.playCards(turn);
         };
     },
 

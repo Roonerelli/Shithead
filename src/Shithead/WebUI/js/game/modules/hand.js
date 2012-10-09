@@ -23,9 +23,6 @@ Hand.prototype = {
 
     draw: function (container) {
 
-        console.log('Hand.draw');
-
-
         this.faceDownCards.forEach(function (card, i) {
             card.draw(container);
         });
@@ -40,8 +37,7 @@ Hand.prototype = {
     },
 
     setPosition: function (playerIndex, container) {
-        console.log('Hand.SetPosn');
-
+        
         var layoutParams = this.player.game.layoutParams;
         
         container.x = layoutParams[playerIndex].x;

@@ -24,7 +24,7 @@
         gameHub.recieveGameState = function (data) {
             console.log(data);
 
-            var game = new Game(data);
+            var game = new Game(data, gameHub);
             game.draw(stage);
         };
 
