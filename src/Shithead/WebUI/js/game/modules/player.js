@@ -1,45 +1,24 @@
-﻿var Player = function (playerData) {
-    var self = this;
-    this.hand = playerData.Hand;
+﻿var Player = function (playerData, playerIndex, game) {
+
+    this.game = game;
     this.playerId = playerData.Id;
+    this.playerIndex = playerIndex;
     this.isThisPlayersTurn = playerData.IsThisPlayersTurn;
     this.isAbleToPlay = playerData.IsAbleToPlay;
     this.name = playerData.Name;
+    this.container = new createjs.Container();
+    this.hand = new Hand(playerData.Hand, this);
 };
 
 Player.prototype = {
 
     constructor: Player,
 
-    draw: function (container) {
+    draw: function (stage) {
+        
+        this.hand.setPosition("player" + this.playerIndex, this.container);
+        this.hand.draw(this.container);
 
-        this.faceDownCards.forEach(function (card, i) {
-            card.draw(container);
-        });
-
-        this.faceUpCards.forEach(function (card, i) {
-            card.draw(container);
-        });
-
-        this.inHandCards.forEach(function (card, i) {
-            card.draw(container);
-        });
-    },
-
-    setPosition: function (playerIndex, container) {
-
-        container.x = layoutParams[playerIndex].x;
-        container.y = layoutParams[playerIndex].y;
-        container.rotation = layoutParams[playerIndex].rot;
-
-        this.faceDownCards.forEach(function (card, i) {
-            card.setPosition(i * 70, 0);
-        });
-        this.faceUpCards.forEach(function (card, i) {
-            card.setPosition(i * 70, 60);
-        });
-        this.inHandCards.forEach(function (card, i) {
-            card.setPosition(i * 20, 80);
-        });
+        stage.addChild(this.container);
     }
 };

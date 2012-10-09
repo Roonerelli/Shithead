@@ -1,8 +1,8 @@
-﻿var Hand = function (handData, gameHub) {
+﻿var Hand = function (handData, player) {
 
     var self = this;
 
-    this.gameHub = gameHub;
+    this.player = player;
     
     this.faceDownCards = handData.FaceDownCards.map(function (card, i) {
         return new Card(card.Rank, card.Suit, false, self);
@@ -23,6 +23,9 @@ Hand.prototype = {
 
     draw: function (container) {
 
+        console.log('Hand.draw');
+
+
         this.faceDownCards.forEach(function (card, i) {
             card.draw(container);
         });
@@ -36,8 +39,11 @@ Hand.prototype = {
         });
     },
 
-    setPosition: function (playerIndex, container, layoutParams) {
+    setPosition: function (playerIndex, container) {
+        console.log('Hand.SetPosn');
 
+        var layoutParams = this.player.game.layoutParams;
+        
         container.x = layoutParams[playerIndex].x;
         container.y = layoutParams[playerIndex].y;
         container.rotation = layoutParams[playerIndex].rot;

@@ -1,4 +1,5 @@
 ﻿var Card = function (rank, suit, isFaceUp, hand) {
+    console.log('New Card');
     this.suit = suit;
     this.rank = rank;
     this.isFaceUp = isFaceUp;
@@ -8,7 +9,7 @@
                             : '/content/images/cards/0504.png';
     this.bmp = new createjs.Bitmap(this.imgUri);
     this.hand = hand;
-    createjs.Ticker.addListener(this);
+    //createjs.Ticker.addListener(this);
 };
 
 Card.prototype = {
@@ -35,16 +36,10 @@ Card.prototype = {
         };
 
         this.bmp.onClick = function () {
-            //console.log("this: " + container.getChildIndex(self.bmp));
             var noOfChildren = container.getNumChildren();
-            var topChild = container.getChildAt(noOfChildren - 1);
-            //console.log("top child: " + container.getChildIndex(topChild));
-
+            
             container.setChildIndex(self.bmp, noOfChildren);
-            //console.log("this: " + container.getChildIndex(self.bmp));
-            //console.log("top child: " + container.getChildIndex(topChild));
-            //self.isBeingPlayed = true;
-
+            
             var turn = {
                 gameId: $('#gameId').val(),
                 playerId: self.hand.playerId,
@@ -72,6 +67,8 @@ Card.prototype = {
 
     tick: function () {
         if (this.isBeingPlayed) {
+
+            var layoutParams = this.player.game.layoutParams;
 
             var playerIndx = this.hand.player,
                     packX = layoutParams[playerIndx].packX,

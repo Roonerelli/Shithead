@@ -1,18 +1,6 @@
 ﻿APP.game = function () {
 
-    var stage,
-        pickupPack = [],
-        clearedCards = [];
-
-    var layoutParams = {
-        "player0": { x: 200, y: 180, rot: 90, packX: 70, packY: -325 },
-        "player1": { x: 450, y: 200, rot: 180, packX: -40, packY: -150 },
-        "player2": { x: 700, y: 200, rot: 180, packX: 190, packY: -150 },
-        "player3": { x: 750, y: 400, rot: 270, packX: 70, packY: -325 },
-        "player4": { x: 250, y: 400, rot: 0, packX: 190, packY: -150 },
-        "player5": { x: 500, y: 400, rot: 0, packX: -40, packY: -150 }
-    };
-
+    var stage;
 
     function _init() { }
 
@@ -38,19 +26,10 @@
             createjs.Ticker.addListener(stage);
 
             gameHub.recieveGameState = function (data) {
-                stage.clear();
-
-                data.Players.forEach(function (player, i) {
-                    var container = new createjs.Container();
-
-                    var hand = new Hand(player.Hand, gameHub);
-                    hand.player = "player" + i;
-                    hand.playerId = player.Id;
-                    hand.setPosition("player" + i, container, layoutParams);
-                    hand.draw(container);
-
-                    stage.addChild(container);
-                });
+                console.log(data);
+                
+                game = new Game(data);
+                game.draw(stage);
             };
 
             gameHub.recieveError = function (data) {
