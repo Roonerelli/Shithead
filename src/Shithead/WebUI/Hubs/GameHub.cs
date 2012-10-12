@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using Raven.Client.Document;
@@ -15,7 +16,7 @@ namespace WebUI.Hubs
 
         public GameHub()
         {
-            _documentStore = new DocumentStore { Url = "http://LAPPIE:8080" };
+            _documentStore = new DocumentStore { Url = ConfigurationManager.ConnectionStrings["RavenConnection"].ToString() };
             _documentStore.Initialize();
         }
 

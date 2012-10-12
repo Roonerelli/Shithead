@@ -1,12 +1,10 @@
-﻿APP.game = function () {
+﻿APP.game = function (game) {
 
-    function _init() { }
+    game.init = function () { };
 
-    function _index() {
-
-        
+    game.index = function () {
         var gameHub = $.connection.gameHub;
-            
+
         $.connection.hub.start()
             .done(function () {
                 console.log("connected...");
@@ -24,8 +22,8 @@
         gameHub.recieveGameState = function (data) {
             console.log(data);
 
-            var game = new Game(data, gameHub);
-            game.draw(stage);
+            var shithead = new Game(data, gameHub);
+            shithead.draw(stage);
         };
 
         gameHub.recieveError = function (data) {
@@ -41,12 +39,11 @@
             var id = $('#gameId').val();
             gameHub.beginGame(id);
         });
-       
-    }
+    };
 
-    function _join() {
+    game.join = function() {
 
-        $('#newGame').click(function () {
+        $('#newGame').click(function() {
             newGame();
         });
 
@@ -57,20 +54,16 @@
                 url: 'http://localhost:50105/api/gameapi',
                 type: 'POST',
                 contentType: "application/json;charset=utf-8",
-                success: function (data) {
+                success: function(data) {
                     $('#gameList').append('<li>New Game....</li>');
                 },
-                error: function (x, y, z) {
+                error: function(x, y, z) {
                     alert(x + '\n' + y + '\n' + z);
                 }
             });
         }
-    }
-
-    return {
-        init: _init,
-        index: _index,
-        join: _join
     };
 
-} ();
+    return game;
+
+} (APP.game || {});

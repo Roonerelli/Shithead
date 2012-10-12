@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -15,7 +16,7 @@ namespace WebUI.Controllers
 
         public GameApiController()
         {
-            documentStore = new DocumentStore { Url = "http://LAPPIE:8080" };
+            documentStore = new DocumentStore { Url = ConfigurationManager.ConnectionStrings["RavenConnection"].ToString() };
             documentStore.Initialize();
         }
         
