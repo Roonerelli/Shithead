@@ -85,7 +85,10 @@ namespace Shithead.Core
                 }
                 return;
             }
-            catch (Exception) { return; }
+            catch (Exception ex)
+            {
+                return;
+            }
             
             PlayRank(cards);    
         }

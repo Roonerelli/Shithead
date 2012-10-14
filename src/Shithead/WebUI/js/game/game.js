@@ -16,14 +16,26 @@
         var canvas = document.getElementById("gameCanvas");
         var stage = new createjs.Stage(canvas);
         stage.enableMouseOver(50);
+        stage.autoClear = true;
         createjs.Ticker.setFPS(60);
         createjs.Ticker.addListener(stage);
 
         gameHub.recieveGameState = function (data) {
             console.log(data);
 
+            stage.clear();
             var shithead = new Game(data, gameHub);
             shithead.draw(stage);
+
+            if (!data.CurrentPlayer.IsAbleToPlay) {
+                var turn = {
+                    gameId: $('#gameId').val(),
+                    playerId: data.CurrentPlayer.Id,
+                    cardsPlayed: []
+                };
+
+                gameHub.playCards(turn);
+            }
         };
 
         gameHub.recieveError = function (data) {
@@ -41,9 +53,9 @@
         });
     };
 
-    game.join = function() {
+    game.join = function () {
 
-        $('#newGame').click(function() {
+        $('#newGame').click(function () {
             newGame();
         });
 
@@ -54,10 +66,10 @@
                 url: 'http://localhost:50105/api/gameapi',
                 type: 'POST',
                 contentType: "application/json;charset=utf-8",
-                success: function(data) {
-                    $('#gameList').append('<li>New Game....</li>');
+                success: function (data) {
+                    $('#gameList').append('<li>New Game....<a class="tiny button joinGame" href="/Game/Index/' + data + '">Join Game</a></li>');
                 },
-                error: function(x, y, z) {
+                error: function (x, y, z) {
                     alert(x + '\n' + y + '\n' + z);
                 }
             });

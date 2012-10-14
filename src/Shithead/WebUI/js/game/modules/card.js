@@ -35,13 +35,12 @@ Card.prototype = {
         };
 
         this.bmp.onClick = function () {
-            var noOfChildren = container.getNumChildren();
-            
-            container.setChildIndex(self.bmp, noOfChildren);
-            
+            this.isBeingPlayed = true;
+            //container.removeChild(self.bmp);
+
             var turn = {
                 gameId: $('#gameId').val(),
-                playerId: self.hand.playerId,
+                playerId: self.hand.player.playerId,
                 cardsPlayed: [{ "Suit": self.suit, "Rank": self.rank}]
             };
 

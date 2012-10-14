@@ -25,9 +25,31 @@ Game.prototype = {
     constructor: Game,
 
     draw: function (stage) {
-        
+
+        var noOfCardsInPickUpPack = this.pickUpPack.length;
+
+        if (noOfCardsInPickUpPack) {
+            var topOfPickUpPack = this.pickUpPack[noOfCardsInPickUpPack - 1];
+
+            var imgUri = this.getImage(topOfPickUpPack.Rank, topOfPickUpPack.Suit);
+            var bmp = new createjs.Bitmap(imgUri);
+
+            stage.addChild(bmp);
+        }
+
+
         this.players.forEach(function (player, i) {
             player.draw(stage);
         });
+    },
+
+    getImage: function (rank, suit) {
+        suit = suit + 1;
+        rank = rank + 1;
+        var r = rank < 10 ? '0' + rank : rank;
+        var s = suit < 10 ? '0' + suit : suit;
+
+        var src = '/content/images/cards/' + s + r + '.png';
+        return src;
     }
 };
