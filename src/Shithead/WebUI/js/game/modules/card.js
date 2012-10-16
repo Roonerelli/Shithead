@@ -8,7 +8,7 @@
                             : '/content/images/cards/0504.png';
     this.bmp = new createjs.Bitmap(this.imgUri);
     this.hand = hand;
-    createjs.Ticker.addListener(this);
+    //createjs.Ticker.addListener(this);
 };
 
 Card.prototype = {
@@ -36,8 +36,8 @@ Card.prototype = {
 
         this.bmp.onClick = function () {
             this.isBeingPlayed = true;
-            //container.removeChild(self.bmp);
-
+            container.removeChild(self.bmp);
+            
             var turn = {
                 gameId: $('#gameId').val(),
                 playerId: self.hand.player.playerId,
@@ -61,41 +61,41 @@ Card.prototype = {
 
         var src = '/content/images/cards/' + s + r + '.png';
         return src;
-    },
-
-    tick: function () {
-        if (this.isBeingPlayed) {
-
-            var layoutParams = this.player.game.layoutParams;
-
-            var playerIndx = this.hand.player,
-                    packX = layoutParams[playerIndx].packX,
-                    packY = layoutParams[playerIndx].packY,
-                    ratio = Math.abs(this.bmp.x - packX) / Math.abs(this.bmp.y - packY);
-
-            if (this.bmp.x < packX) {
-                this.bmp.x += 7 * ratio;
-                this.bmp.rotation += 10;
-            }
-
-            if (this.bmp.y < packY) {
-                this.bmp.y += 7;
-                this.bmp.rotation += 10;
-            }
-
-            if (this.bmp.x > packX) {
-                this.bmp.x -= 7 * ratio;
-                this.bmp.rotation += 10;
-            }
-
-            if (this.bmp.y > packY) {
-                this.bmp.y -= 7;
-                this.bmp.rotation += 10;
-            }
-
-            //this.bmp.x = stage.mouseY - 200;
-            //this.bmp.y = stage.mouseX -200;
-            //this.bmp.rotation += 90;
-        }
     }
+
+//    tick: function () {
+//        if (this.isBeingPlayed) {
+
+//            var layoutParams = this.player.game.layoutParams;
+
+//            var playerIndx = this.hand.player,
+//                    packX = layoutParams[playerIndx].packX,
+//                    packY = layoutParams[playerIndx].packY,
+//                    ratio = Math.abs(this.bmp.x - packX) / Math.abs(this.bmp.y - packY);
+
+//            if (this.bmp.x < packX) {
+//                this.bmp.x += 7 * ratio;
+//                this.bmp.rotation += 10;
+//            }
+
+//            if (this.bmp.y < packY) {
+//                this.bmp.y += 7;
+//                this.bmp.rotation += 10;
+//            }
+
+//            if (this.bmp.x > packX) {
+//                this.bmp.x -= 7 * ratio;
+//                this.bmp.rotation += 10;
+//            }
+
+//            if (this.bmp.y > packY) {
+//                this.bmp.y -= 7;
+//                this.bmp.rotation += 10;
+//            }
+
+//            //this.bmp.x = stage.mouseY - 200;
+//            //this.bmp.y = stage.mouseX -200;
+//            //this.bmp.rotation += 90;
+//        }
+//    }
 };

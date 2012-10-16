@@ -15,7 +15,7 @@ Player.prototype = {
     constructor: Player,
 
     draw: function (stage) {
-        this.container.removeAllChildren();
+
         this.hand.setPosition("player" + this.playerIndex, this.container);
         this.hand.draw(this.container);
         var playerName = new createjs.Text(this.name + ' (Player ' + this.playerIndex + ')');

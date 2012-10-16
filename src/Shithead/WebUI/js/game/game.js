@@ -24,8 +24,11 @@
             console.log(data);
 
             stage.clear();
+            stage.removeAllChildren();
+        
             var shithead = new Game(data, gameHub);
             shithead.draw(stage);
+            
 
             if (!data.CurrentPlayer.IsAbleToPlay) {
                 var turn = {
@@ -76,6 +79,12 @@
         }
     };
 
+
+    game.test = function () {
+        
+
+    };
+    
     return game;
 
 } (APP.game || {});

@@ -5,7 +5,7 @@
     this.pickUpPack = gameData.PickUpPack;
     this.clearedCards = gameData.ClearedCards;
     this.deck = gameData.Deck;
-
+    
     this.players = gameData.Players.map(function (player, i) {
         return new Player(player, i, self);
     });
@@ -33,10 +33,10 @@ Game.prototype = {
 
             var imgUri = this.getImage(topOfPickUpPack.Rank, topOfPickUpPack.Suit);
             var bmp = new createjs.Bitmap(imgUri);
-
             stage.addChild(bmp);
+            bmp.x = 500;
+            bmp.y = 255;
         }
-
 
         this.players.forEach(function (player, i) {
             player.draw(stage);
